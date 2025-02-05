@@ -1,0 +1,340 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cache-Control" content="public, max-age=31536000">
+    <meta http-equiv="Expires" content="31536000">
+
+    <title>Skycāt Service</title>
+    <style>
+        /* Reset Margin dan Padding */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+            background-color: #0f1227;
+        }
+
+        /* Efek Scroll Halus */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Header Section */
+        .header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            color: white;
+        }
+
+        /* Background Header */
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://cdn.pixabay.com/photo/2016/11/30/20/58/programming-1873854_1280.png') no-repeat center center/cover;
+            filter: brightness(50%);
+            z-index: -2;
+        }
+
+        .header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(20, 26, 51, 0.7), rgba(15, 18, 39, 0.9));
+            z-index: -1;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #00d9ff, #8a2be2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .header a {
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            background: linear-gradient(90deg, #00d9ff, #8a2be2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .header a:hover {
+            transform: scale(1.1);
+            background: linear-gradient(90deg, #8a2be2, #00d9ff);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 50px 15px;
+            background: #141a33;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #00d9ff;
+        }
+
+        .service-card {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            padding: 30px;
+            background: #1b223c;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            text-align: left;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .service-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-card ul li {
+            margin-bottom: 10px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .service-card ul li:before {
+            position: absolute;
+            left: 0;
+        }
+
+        .service-card .price {
+            margin-top: 20px;
+            font-size: 1.2rem;
+            color: #00d9ff;
+            font-weight: bold;
+        }
+
+        .service-card a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            color: white;
+            text-decoration: none;
+            background: linear-gradient(90deg, #00d9ff, #8a2be2);
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .service-card a:hover {
+            transform: scale(1.1);
+            background: linear-gradient(90deg, #8a2be2, #00d9ff);
+        }
+
+        /* Footer Section */
+        .footer {
+            padding: 20px;
+            background: #0f1227;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            margin-top: 30px;
+        }
+
+        .footer a {
+            color: #00d9ff;
+            text-decoration: none;
+        }
+
+        /* Tombol Kembali ke Atas */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(90deg, #00d9ff, #8a2be2);
+            color: white;
+            padding: 10px 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <section class="header">
+        <h1>Skycat Stresser C2-API</h1>
+        <p>Solusi Keamanan Digital Premium dengan Teknologi Tercanggih</p>
+        <a href="index.html#services">Lihat Layanan</a>
+    </section>
+
+    <!-- Section Layanan -->
+    <section class="services" id="services">
+        <h2>Layanan Kami</h2>
+        
+        <div class="service-card">
+            <h3>Jasa DDoS Attack</h3>
+            <ul>
+                <li>Layer 7: HTTP/HTTPS Flood (2M rps)</li>
+                <li>Bypass WAF & Anti-DDoS System</li>
+                <li>Bypass Cache System</li>
+            </ul>
+            <p class="price">Rp.150.000/Jam</p>
+            <a href="https://t.me/udpflood53">Pesan Sekarang</a>
+        </div>
+
+        <div class="service-card">
+            <h3>Plans C2-API BASIC</h3>
+            <ul>
+                <li>200s Max time</li>
+                <li>40s Cooldown</li>
+                <li>1 Concurrents</li>
+                <li>1 Minggu</li>
+            </ul>
+            <p class="price">Rp.240.000</p>
+            <a href="https://t.me/udpflood53">Pesan Sekarang</a>
+        </div>
+        
+        <div class="service-card">
+            <h3>Plans C2-API BASIC</h3>
+            <ul>
+                <li>250s Max time</li>
+                <li>30s Cooldown</li>
+                <li>1 Concurrents</li>
+                <li>2 Minggu</li>
+            </ul>
+            <p class="price">Rp.360.000</p>
+            <a href="https://t.me/udpflood53">Pesan Sekarang</a>
+        </div>
+        
+        <div class="service-card">
+            <h3>Plans C2-API VIP</h3>
+            <ul>
+                <li>350s Max time</li>
+                <li>20s Cooldown</li>
+                <li>2 Concurrents</li>
+                <li>Api Akses</li>
+                <li>3 Minggu</li>
+            </ul>
+            <p class="price">Rp.700.000</p>
+            <a href="https://t.me/udpflood53">Pesan Sekarang</a>
+        </div>
+ 
+        <div class="service-card">
+            <h3>Plans C2-API SUPER VIP</h3>
+            <ul>
+                <li>500s Max time</li>
+                <li>0s Cooldown</li>
+                <li>5 Concurrents</li>
+                <li>Api Akses</li>
+                <li>1 Bulan</li>
+            </ul>
+            <p class="price">Rp.2.000.000</p>
+            <a href="https://t.me/udpflood53">Pesan Sekarang</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        © 2020-2025 Skycāt. All Rights Reserved.
+    </footer>
+
+    <!-- Tombol Kembali ke Atas -->
+    <div class="back-to-top" id="back-to-top">⬆</div>
+
+    <!-- JavaScript -->
+    <script>
+        const backToTop = document.getElementById("back-to-top");
+
+        window.onscroll = function () {
+            if (window.scrollY > 300) {
+                backToTop.style.display = "block";
+            } else {
+                backToTop.style.display = "none";
+            }
+        };
+
+        backToTop.addEventListener("click", function () {
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        });
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" type="3347ab5cb8c6435bf7cebd7f-text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" type="3347ab5cb8c6435bf7cebd7f-text/javascript"></script>
+    <script type="3347ab5cb8c6435bf7cebd7f-text/javascript">
+        AOS.init({
+            duration: 1500,
+            once: true,
+            mirror: true,
+            offset: 100
+        });
+
+        // Enable browser caching
+        if ('caches' in window) {
+            caches.open('static-cache-v1').then(cache => {
+                const urlsToCache = [
+                    '/',
+                    '/index.html',
+                    'https://unpkg.com/aos@2.3.1/dist/aos.css',
+                    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',
+                    'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap',
+                    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+                    'https://unpkg.com/aos@2.3.1/dist/aos.js',
+                    'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js',
+                    'https://illustrations.popsy.co/white/hacker.svg'
+                ];
+                return cache.addAll(urlsToCache);
+            });
+        }
+    </script>
+<script src="https://itcjapan.net/cdn-cgi/scripts/7d0fa10a/cloudflare-static/rocket-loader.min.js" data-cf-settings="3347ab5cb8c6435bf7cebd7f-|49" defer></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'8fbd446b7b02ce35',t:'MTczNTg0NzMxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"8fbd446b7b02ce35","version":"2024.10.5","r":1,"token":"5e4f693909ce4e41bf6778a424d1ced0","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+</body>
+</html>
+  
